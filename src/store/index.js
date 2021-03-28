@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios)
 export default new Vuex.Store({
   state: {
 
-    backEnd: "http://localhost:3000/api/v1/",
+    backEnd: "https://api-blog-node.herokuapp.com/api/v1/",
 
     connected: false,
 
