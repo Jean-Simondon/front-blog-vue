@@ -11,13 +11,9 @@
         <p class="article__author">{{ author.username }}</p>
 
         <div class="article__admin-option">
-
           <a v-if="identified" v-show="!isCreated" @click="createOrSave"><button class="btn btn__green">CREER</button></a>
-
           <a v-if="identified" v-show="isCreated" @click="createOrSave"><button class="btn btn__green" >SAUVEGARDER</button></a>
-
           <router-link :to="{ name: 'Articles' }"><button class="btn btn__blue">RETOUR</button></router-link>
-
         </div>
 
     </div>
@@ -70,7 +66,7 @@ export default {
       } else {
         return false;
       }
-    },    
+    },
     createOrSave() {
       const axiosConfig = {
         headers: {
@@ -97,7 +93,7 @@ export default {
       }
       this.$store.dispatch('fetchArticle', this.$route.params.articleId );
       return true;
-    }
+    },
   },
 
 };

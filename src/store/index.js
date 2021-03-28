@@ -50,6 +50,10 @@ export default new Vuex.Store({
 
       RESET_JWT(state) {
         state.jwt = undefined;
+      },
+
+      RESET_CURRENT_USER(state) {
+        state.currentUser = undefined;
       }
 
   },
@@ -98,6 +102,7 @@ export default new Vuex.Store({
 
       logout({ commit }) {
         commit('RESET_JWT');
+        commit('RESET_CURRENT_USER');
       },
 
   },

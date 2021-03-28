@@ -1,7 +1,10 @@
 <template>
   <div class="account">
 
-    <h1>Account</h1>
+    <h1>Profil</h1>
+
+    <p>Username : {{ getCurrentUser.username }}</p>
+    <p>Email : {{ getCurrentUser.email }}</p>
 
   </div>
 </template>
@@ -10,6 +13,13 @@
 
 export default {
   name: 'Account',
+
+  computed: {
+    getCurrentUser() {
+      console.log(this.$store.state.currentUser);
+      return this.$store.state.currentUser;
+    }
+  }
 
 };
 </script>

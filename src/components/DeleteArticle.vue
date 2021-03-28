@@ -9,7 +9,7 @@
       <p class="article__author">{{ author.username }}</p>
 
       <div class="article__admin-option">
-        <a v-if="identified" v-show="!isDestroy" @click="erase"><button class="btn btn__red" >CONFIRMER</button></a>
+        <a v-if="identified && isAuthor" v-show="!isDestroy" @click="erase"><button class="btn btn__red" >CONFIRMER</button></a>
         <router-link v-show="!isDestroy" :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'read' }}"><button class="btn btn__green" >RETOUR</button></router-link>
         <router-link v-show="isDestroy" :to="{ name: 'Articles' }"><button class="btn btn__green" >RETOUR</button></router-link>
       </div>
@@ -53,6 +53,12 @@ export default {
     }
   },
 
+  computed: {
+    isAuthor() {
+      return this.$store.state.currentUser.email === this.author.email;
+    }
+  },
+
   methods: {
     identified() {
       if( this.$store.state.jwt !== undefined ) {
@@ -74,7 +80,7 @@ export default {
       })
       .catch(error => console.log(error));
       this.$store.dispatch('fetchArticle', this.$route.params.articleId );
-    }
+    },
   }
 
 };

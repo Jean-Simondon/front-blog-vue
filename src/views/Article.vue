@@ -61,7 +61,6 @@ export default {
 
   computed: {
     getArticle() {
-      console.log(this.$store.state.article.author[0]);
       return this.$store.state.article;
     },
     identified() {

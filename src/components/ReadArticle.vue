@@ -6,9 +6,9 @@
       <p>{{ content }}</p>
       <p>{{ author.username }}</p>
 
-      <div class="article__admin-option">
-        <router-link v-if="identified" :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'update' }}"><button class="btn btn__blue">UPDATE</button></router-link>
-        <router-link v-if="identified" :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'delete' }}"><button class="btn btn__blue">DELETE</button></router-link>
+      <div v-if="identified && isAuthor" class="article__admin-option">
+        <router-link :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'update' }}"><button class="btn btn__blue">UPDATE</button></router-link>
+        <router-link :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'delete' }}"><button class="btn btn__blue">DELETE</button></router-link>
       </div>
 
     </div>
@@ -54,11 +54,6 @@ export default {
   },
 
   computed: {
-    isAuthor() {
-      return true;
-      // return is author
-      // si l'autheur de l'article a le même id que l'id de l'utilisateur courant
-    },
     identified() {
       if( this.$store.state.jwt !== undefined ) {
         return true;
@@ -66,6 +61,9 @@ export default {
         return false;
       }
     },
+    isAuthor() {
+      return this.$store.state.currentUser.email === this.author.email;
+    }
 
   },
   

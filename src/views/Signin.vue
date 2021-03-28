@@ -63,7 +63,6 @@ export default {
 
   methods: {
     submitForm() {
-      console.log("test");
       if( this.username == "" || this.password == "" || this.username == "" ) {
         return;
       }

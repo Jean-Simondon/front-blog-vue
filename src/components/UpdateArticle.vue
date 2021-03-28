@@ -9,7 +9,7 @@
       <p>Auteur : {{ author.username }}</p>
 
       <div class="article__admin-option">
-        <a v-if="identified" @click="update"><button class="btn btn__red" >SAUVEGARDER</button></a>
+        <a v-if="isAuthor && identified" @click="update"><button class="btn btn__red" >SAUVEGARDER</button></a>
         <router-link :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'read' }}"><button class="btn btn__green" >RETOUR</button></router-link>
       </div>
 
@@ -55,6 +55,12 @@ export default {
       isLoading: false,
       internalTitle: this.title,
       internalContent: this.content,
+    }
+  },
+
+  computed: {
+    isAuthor() {
+      return this.$store.state.currentUser.email === this.author.email;
     }
   },
 
