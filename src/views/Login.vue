@@ -4,8 +4,9 @@
     <h1>Connexion</h1>
 
     <p class="error" v-if="isError">Erreur de connexion, veuillez essayer à nouveau</p>
+    <p v-if="identified">Vous êtes maintenant connecté</p>
 
-    <div v-if="!identified && !isConnecting"  class="login__form" action="">
+    <form v-if="!identified && !isConnecting"  class="login__form" action="">
 
       <div class="login__field">
 
@@ -22,18 +23,16 @@
       </div>
 
       <div class="login__submit">
-        <button @click="submitForm" class="btn btn__blue">Connexion</button>
+        <div @click="submitForm" class="btn btn__blue">Connexion</div>
       </div>
 
-    </div>
+    </form>
 
     <div v-if="isConnecting">
       <img src="../assets/spinner.gif" alt="spinner" />
     </div>
 
-    <div v-if="identified">
-      <p>Vous êtes connecté</p>
-    </div>
+
 
   </div>
 </template>
@@ -69,17 +68,9 @@ export default {
         email: this.email,
         password: this.password,
       };
-      this.isConnecting = !this.$store.dispatch( 'login', payload );
-      if( this.isConnecting == true ) {
-        this.displayError();
-        this.isConnecting = false;
-      }
-    },
-    displayError() {
-      setTimeout(function() {
-        this.isError = false;
-      }, 4000);
-    },
+      this.$store.dispatch( 'login', payload );
+      this.isConnecting = false;
+    }
   }
 
 };

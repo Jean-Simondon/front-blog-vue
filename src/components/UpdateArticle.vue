@@ -10,7 +10,7 @@
 
       <div class="article__admin-option" v-if="!isSaving">
         <a v-if="isAuthor && identified" @click="update"><button class="btn btn__red" >SAUVEGARDER</button></a>
-        <router-link :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'read' }}"><button class="btn btn__green" >RETOUR</button></router-link>
+        <router-link :to="{ name: 'Articles'}"><button class="btn btn__green" >RETOUR</button></router-link>
       </div>
 
       <div class="article__admin-option" v-if="isSaving">

@@ -105,6 +105,7 @@ export default new Vuex.Store({
       login({commit, dispatch }, payload) {
         Vue.axios.post( this.state.backEnd + "auth/login", payload )
         .then( (response) => {
+          console.log(response);
           commit('LOAD_JWT', response.data.jwt);
           dispatch('fetchCurrentUser');
           return true;

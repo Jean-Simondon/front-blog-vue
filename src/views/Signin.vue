@@ -6,7 +6,7 @@
     <p class="error" v-if="isError">Erreur de création de compte, veuillez essayer à nouveau</p>
     <p class="success" v-if="isSuccess">Bravo, votre compte a été crée avec succès</p>
 
-    <div v-if="!identified && !isCreating && !isSuccess" class="signin__form">
+    <form v-if="!identified && !isCreating && !isSuccess" class="signin__form" action="">
 
       <div class="signin__field">
 
@@ -28,15 +28,14 @@
       </div>
 
       <div class="signin__submit">
-        <button @click="submitForm" class="btn btn__blue">Inscription</button>
+        <div @click="submitForm" class="btn btn__blue">Inscription</div>
       </div>
 
-    </div>
+    </form>
 
     <div v-if="isCreating">
       <img src="../assets/spinner.gif" alt="spinner" />
     </div>
-
 
     <div v-if="identified">
       <p>Vous êtes Connecté. Déconnectez-vous avant de créer un autre compte</p>
@@ -76,9 +75,9 @@ export default {
     submitForm() {
       if( this.username == "" || this.username == undefined || this.password == "" ||  this.password == undefined || this.username == "" ||  this.username == undefined ) {
         return;
-      } else {
-        this.isCreating = true;
       }
+      this.isCreating = true;
+      const self = this;
       let data = {
         username: this.username,
         email: this.email,
@@ -90,16 +89,16 @@ export default {
           this.isCreating = false;
           this.isSuccess = true;
           setTimeout(function() {
-            this.isSuccess = false;
-          }, 4000);
+            self.isSuccess = false;
+          }, 3000);
         })
         .catch(error => {
           console.log(error);
           this.isCreating = false;
           this.isError = true;
           setTimeout(function() {
-            this.isError = false;
-          }, 4000);
+            self.isError = false;
+          }, 3000);
         });
     },
   }
