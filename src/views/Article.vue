@@ -29,7 +29,7 @@
 
     </div>
 
-    <div class="article-wrapper" v-else>
+    <div class="article-wrapper" v-if="isLoading">
       <img src="../assets/spinner.gif" alt="spinner" />
     </div>
 
@@ -55,7 +55,7 @@ export default {
 
   data() {
     return {
-      isLoading: false,
+      isLoading: true,
     }
   },
 
@@ -101,9 +101,12 @@ export default {
 
  },
 
+ beforeMount() {
+   this.isLoading = false;
+ },
+
   mounted() {
-    this.isLoading = false;
-    this.$store.dispatch('fetchArticle', this.$route.params.articleId );
+    this.isLoading = !this.$store.dispatch('fetchArticle', this.$route.params.articleId );
   }
 
 };

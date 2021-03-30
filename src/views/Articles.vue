@@ -13,7 +13,7 @@
       />
     </div>
 
-    <div class="card-wrapper" v-else>
+    <div class="card-wrapper" v-if="isLoading">
       <img src="../assets/spinner.gif" alt="spinner" />
     </div>
 
@@ -57,9 +57,12 @@ export default {
     }
   },
 
+  beforeMount() {
+    this.isLoading = true;
+  },
+
   mounted() {
-    this.$store.dispatch('fetchArticles');
-    this.isLoading = false;
+    this.isLoading = !this.$store.dispatch('fetchArticles');
   }
 
 };

@@ -53,6 +53,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      isDestroy: false,
+    }
+  },
+
   computed: {
     isAuthor() {
       return this.$store.state.currentUser.email === this.author.email;

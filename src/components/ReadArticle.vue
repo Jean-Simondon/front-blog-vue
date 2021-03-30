@@ -84,10 +84,6 @@ export default {
       margin: 0 auto;
     }
 
-    &__author {
-      
-    }
-
   }
 
 </style>

@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
 
     backEnd: "https://api-blog-node.herokuapp.com/api/v1/",
+    // backEnd: "http://localhost:3000/api/v1/",
 
     connected: false,
 
@@ -64,20 +65,27 @@ export default new Vuex.Store({
         Vue.axios.get( this.state.backEnd + "article/" + idArticle )
         .then( (response) => {
           commit('LOAD_ARTICLE', response.data.data.article);
+          return true;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error)
+          return false;
+        });
       },
 
       fetchArticles({ commit }) {
         Vue.axios.get( this.state.backEnd + "article" )
         .then( (response) => {
           commit('LOAD_ARTICLES', response.data.data.article);
+          return true;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error)
+          return false;
+        });
       },
 
       fetchCurrentUser({ commit }) {
-        console.log( 'fetch current user in store');
         const axiosConfig = {
           headers: {
             'Authorization': 'Bearer ' + this.state.jwt,
@@ -86,12 +94,15 @@ export default new Vuex.Store({
         Vue.axios.get( this.state.backEnd + "user/currentuser", axiosConfig )
         .then( (response) => {
           commit('LOAD_CURRENT_USER', response.data.data.user )
+          return true;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error)
+          return false;
+        });
       },
 
       login({commit, dispatch }, payload) {
-        console.log(payload);
         Vue.axios.post( this.state.backEnd + "auth/login", payload )
         .then( (response) => {
           commit('LOAD_JWT', response.data.jwt);
