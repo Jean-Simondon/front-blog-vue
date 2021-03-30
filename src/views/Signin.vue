@@ -74,7 +74,7 @@ export default {
 
   methods: {
     submitForm() {
-      if( this.username == "" || this.password == "" || this.username == "" ) {
+      if( this.username == "" || this.username == undefined || this.password == "" ||  this.password == undefined || this.username == "" ||  this.username == undefined ) {
         return;
       } else {
         this.isCreating = true;
@@ -90,7 +90,6 @@ export default {
           this.isCreating = false;
           this.isSuccess = true;
           setTimeout(function() {
-            console.log("disparition");
             this.isSuccess = false;
           }, 4000);
         })
@@ -99,7 +98,6 @@ export default {
           this.isCreating = false;
           this.isError = true;
           setTimeout(function() {
-            console.log("disparition");
             this.isError = false;
           }, 4000);
         });
