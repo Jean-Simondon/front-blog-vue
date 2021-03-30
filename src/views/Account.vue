@@ -16,7 +16,6 @@ export default {
 
   computed: {
     getCurrentUser() {
-      console.log(this.$store.state.currentUser);
       return this.$store.state.currentUser;
     }
   }

@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if="!isLoading" class="article">
+    <div class="article">
 
       <h1>MODIFIER</h1>
 
@@ -8,9 +8,13 @@
       <textarea class="article__content" rows="30" cols="100" v-model="internalContent" />
       <p>Auteur : {{ author.username }}</p>
 
-      <div class="article__admin-option">
+      <div class="article__admin-option" v-if="!isSaving">
         <a v-if="isAuthor && identified" @click="update"><button class="btn btn__red" >SAUVEGARDER</button></a>
         <router-link :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'read' }}"><button class="btn btn__green" >RETOUR</button></router-link>
+      </div>
+
+      <div class="article__admin-option" v-if="isSaving">
+        <img src="../assets/spinner.gif" alt="spinner" />
       </div>
 
     </div>
@@ -52,7 +56,7 @@ export default {
 
   data() {
     return {
-      isLoading: false,
+      isSaving: false,
       internalTitle: this.title,
       internalContent: this.content,
     }
@@ -66,13 +70,10 @@ export default {
 
   methods: {
     identified() {
-      if( this.$store.state.jwt !== undefined ) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.$store.state.jwt !== undefined;
     },
     update() {
+      this.isSaving = true;
       const axiosConfig = {
         headers: {
           'Authorization': 'Bearer ' + this.$store.state.jwt,
@@ -85,8 +86,12 @@ export default {
       Vue.axios.patch( this.$store.state.backEnd + "article/" + this.id, data, axiosConfig )
         .then( (response ) => {
           console.log(response);
+          this.isSaving = false;
         })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        this.isSaving = false;
+      });
       return true;
     },
   }

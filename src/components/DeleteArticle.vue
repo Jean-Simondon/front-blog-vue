@@ -8,11 +8,15 @@
       <p class="article__content">{{ content }}</p>
       <p class="article__author">{{ author.username }}</p>
 
-      <div class="article__admin-option">
+      <div class="article__admin-option" v-if="!isDeleting">
         <a v-if="identified && isAuthor" v-show="!isDestroy" @click="erase"><button class="btn btn__red" >CONFIRMER</button></a>
         <router-link v-show="!isDestroy" :to="{ name: 'Article', params: { articleId: this.$route.params.articleId, mode: 'read' }}"><button class="btn btn__green" >RETOUR</button></router-link>
         <router-link v-show="isDestroy" :to="{ name: 'Articles' }"><button class="btn btn__green" >RETOUR</button></router-link>
       </div>
+
+    <div class="article__admin-option" v-if="isDeleting">
+      <img src="../assets/spinner.gif" alt="spinner" />
+    </div>
 
     <div class="dark_layer"></div>
 
@@ -56,6 +60,7 @@ export default {
   data() {
     return {
       isDestroy: false,
+      isDeleting: false,
     }
   },
 
@@ -74,6 +79,7 @@ export default {
       }
     },    
     erase() {
+      this.isDeleting = true;
       const axiosConfig = {
         headers: {
           'Authorization': 'Bearer ' + this.$store.state.jwt,
@@ -83,8 +89,12 @@ export default {
       .then( (response ) => {
         console.log(response);
         this.isDestroy = true;
+        this.isDeleting = false;
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error)
+        this.isDeleting = false;
+      });
       this.$store.dispatch('fetchArticle', this.$route.params.articleId );
     },
   }

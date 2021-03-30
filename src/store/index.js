@@ -107,8 +107,12 @@ export default new Vuex.Store({
         .then( (response) => {
           commit('LOAD_JWT', response.data.jwt);
           dispatch('fetchCurrentUser');
+          return true;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error);
+          return false;
+        });
       },
 
       logout({ commit }) {

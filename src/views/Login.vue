@@ -3,7 +3,9 @@
 
     <h1>Connexion</h1>
 
-    <div v-if="!identified" class="login__form" action="">
+    <p class="error" v-if="isError">Erreur de connexion, veuillez essayer à nouveau</p>
+
+    <div v-if="!identified && !isConnecting"  class="login__form" action="">
 
       <div class="login__field">
 
@@ -25,7 +27,11 @@
 
     </div>
 
-    <div v-else>
+    <div v-if="isConnecting">
+      <img src="../assets/spinner.gif" alt="spinner" />
+    </div>
+
+    <div v-if="identified">
       <p>Vous êtes connecté</p>
     </div>
 
@@ -39,8 +45,10 @@ export default {
 
   data() {
     return {
+      isError: false,
       email: "",
       password: "",
+      isConnecting: false,
     }
   },
 
@@ -56,12 +64,22 @@ export default {
 
   methods: {
     submitForm() {
+      this.isConnecting = true;
       let payload = {
         email: this.email,
         password: this.password,
       };
-      this.$store.dispatch( 'login', payload );      
-    }
+      this.isConnecting = !this.$store.dispatch( 'login', payload );
+      if( this.isConnecting == true ) {
+        this.displayError();
+        this.isConnecting = false;
+      }
+    },
+    displayError() {
+      setTimeout(function() {
+        this.isError = false;
+      }, 4000);
+    },
   }
 
 };

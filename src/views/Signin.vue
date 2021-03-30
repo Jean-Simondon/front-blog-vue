@@ -3,7 +3,10 @@
 
     <h1>Connexion</h1>
 
-    <div v-if="!identified" class="signin__form">
+    <p class="error" v-if="isError">Erreur de création de compte, veuillez essayer à nouveau</p>
+    <p class="success" v-if="isSuccess">Bravo, votre compte a été crée avec succès</p>
+
+    <div v-if="!identified && !isCreating && !isSuccess" class="signin__form">
 
       <div class="signin__field">
 
@@ -30,7 +33,12 @@
 
     </div>
 
-    <div v-else>
+    <div v-if="isCreating">
+      <img src="../assets/spinner.gif" alt="spinner" />
+    </div>
+
+
+    <div v-if="identified">
       <p>Vous êtes Connecté. Déconnectez-vous avant de créer un autre compte</p>
     </div>
 
@@ -48,6 +56,9 @@ export default {
       username: "",
       email: "",
       password: "",
+      isCreating: false,
+      isError: false,
+      isSuccess: false,
     }
   },
 
@@ -65,6 +76,8 @@ export default {
     submitForm() {
       if( this.username == "" || this.password == "" || this.username == "" ) {
         return;
+      } else {
+        this.isCreating = true;
       }
       let data = {
         username: this.username,
@@ -74,8 +87,22 @@ export default {
       Vue.axios.post( this.$store.state.backEnd + "user", data )
         .then( (response) => {
           console.log(response);
+          this.isCreating = false;
+          this.isSuccess = true;
+          setTimeout(function() {
+            console.log("disparition");
+            this.isSuccess = false;
+          }, 4000);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error);
+          this.isCreating = false;
+          this.isError = true;
+          setTimeout(function() {
+            console.log("disparition");
+            this.isError = false;
+          }, 4000);
+        });
     },
   }
   

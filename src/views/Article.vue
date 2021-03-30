@@ -3,7 +3,7 @@
   <div class="article">
 
     <div class="article-wrapper" v-if="!isLoading">
-      
+
       <ReadArticle v-if="reading"
         :id="getArticle._id"
         :title="getArticle.title"
@@ -101,9 +101,9 @@ export default {
 
  },
 
- beforeMount() {
-   this.isLoading = false;
- },
+  beforeMount() {
+    this.isLoading = true;
+  },
 
   mounted() {
     this.isLoading = !this.$store.dispatch('fetchArticle', this.$route.params.articleId );
