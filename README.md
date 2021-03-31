@@ -24,6 +24,20 @@ yarn lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+INSTALLATION :
+
+le code a été exécuté avec node 14.15.0
+
+L'url github de l'api est : https://github.com/Jean-Simondon/API-blog-node
+l'url github du front est : https://github.com/Jean-Simondon/front-blog-vue
+
+l'api est à lancer avec les commandes "npm run start" ou "npm run watch" après avoir lancé "npm install" sur la racine bien sûr. 
+la partie front est à lancer avec la commande "npm run serve" après avoir lancé "npm install"
+
+l'url de l'api se trouve à : https://api-blog-node.herokuapp.com/api/v1/
+l'url du front se trouve à : https://wonderful-turing-d512ba.netlify.app/
+
+
 
 
 
