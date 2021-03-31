@@ -11,14 +11,14 @@
 
     <h3>Articles</h3>
 
-    <p>Cette page listera tous les articles de la base de données, quelque soit l'auteur, et que vous soyez en mode connecté. À noter que si vous êtes connectés, vous disposerez d'un bouton "Nouvel Article" afin d'en créer un nouveau</p>
+    <p>Cette page listera tous les articles de la base de données, quelque soit l'auteur, et que vous soyez en mode connecté ou non. À noter que si vous êtes connectés, vous disposerez d'un bouton "Nouvel Article"</p>
 
     <h3>Article</h3>
 
     <p>
       En cliquant sur un article, cela vous mène à sa page de détails.
       Si vous étiez sur un autre article précédemment, un délais peut exister pour l'affichage et prendre du temps avant de remplacer le précédent article.
-      Si vous êtes connectés, et que vous êtes l'auteur de cet article, alors les bouton UPDATE et DELETE s'affichent.
+      Si vous êtes connectés, et que vous êtes l'auteur de cet article, alors les boutons UPDATE et DELETE s'affichent.
       Ils vous mèneront respectivement à des pages proposant la modification de l'article, ou à la confirmation de sa suppression.
     </p>
 
