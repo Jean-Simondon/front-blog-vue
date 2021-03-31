@@ -4,7 +4,7 @@
     <div class="card">
       <h1 class="card__title">{{ cropTitle }}</h1>
       <p class="card__content">{{ cropContent }}</p>
-      <p class="card__author">{{ author[0].username }}</p>
+      <p class="card__author">{{ getAuthorName }}</p>
     </div>
   </router-link>
 
@@ -39,6 +39,9 @@ export default {
     },
     cropContent() {
       return this.content.substring(0, 45) + "...";
+    },
+    getAuthorName() {
+      return this.author.username;
     }
   }
 

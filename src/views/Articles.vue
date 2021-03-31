@@ -9,7 +9,7 @@
           :id="article._id"
           :title="article.title"
           :content="article.content"
-          :author="article.author"
+          :author="article.author[0]"
       />
     </div>
 

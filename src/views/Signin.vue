@@ -3,7 +3,7 @@
 
     <h1>Connexion</h1>
 
-    <p class="error" v-if="isError">Erreur de création de compte, veuillez essayer à nouveau</p>
+    <p class="error" v-if="isError">Erreur de création de compte, veuillez essayer à nouveau après vérification des informations</p>
     <p class="success" v-if="isSuccess">Bravo, votre compte a été crée avec succès</p>
 
     <form v-if="!identified && !isCreating && !isSuccess" class="signin__form" action="">

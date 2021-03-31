@@ -10,7 +10,7 @@
     <p class="home_content">Vous êtes libre de parcourir le site afin de tester les différentes routes, notamment la page d'archive des articles qui vous menèra, au clic sur une carte, vers l'article complet en question.</p>
     <p class="home_content">Vous êtes également invité à utiliser le système de compte pour vous inscrire et accéder aux fonctionnalités de création / modification / suppression d'article.</p>
 
-    <p>N'hésitez pas à vous rendre sur la page <router-link to="/about">A Propos</router-link> pour obtenir d'avantage d'informations à propos de la réalisation de ce projet.</p>
+    <p>N'hésitez pas à vous rendre sur la page <router-link to="/about">A Propos</router-link> pour obtenir d'avantage d'informations à propos de chaque fonctionnalité de ce projet.</p>
 
     <p class="home__author">Jean Simondon</p>
 
